@@ -9,7 +9,7 @@
         die("Connection failed: " . "<br>" . $conn->connect_error);
     }
 
-    $sqlSelect = "SELECT comment from comments";
+    $sqlSelect = "SELECT id, name, comment from comments";
 
     $runQuery = $conn->query($sqlSelect);
 
@@ -42,17 +42,26 @@
             ?>
         </h3>
         <h5 class = "d-flex align-items-center justify-content-center">Comments written in the database:</h5>
+        <table class = "table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
         <p class = "d-flex align-items-center justify-content-center">
             <?php  
                 if ($runQuery->num_rows > 0) {
                     while($row = $runQuery->fetch_assoc()) {
-                        echo $row["comment"] . " ";
+                        echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["comment"] . "</td></tr>";
                     }
                     } else {
                         echo "No Comment Written in the Database";
                 }
             ?>
         </p>
+        </table>
         </div>
     </div>
 </body>
