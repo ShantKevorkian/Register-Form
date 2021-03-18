@@ -30,7 +30,7 @@
             exit();
         }
 
-        $selectEmail = "SELECT id, email, name FROM user_reg WHERE email = '$email' and password = '$hashedPassword'";
+        $selectEmail = "SELECT id, name FROM user_reg WHERE email = '$email' and password = '$hashedPassword'";
 
         $runQuery = $conn->query($selectEmail);
 
@@ -50,7 +50,7 @@
             if ($count == 1) {
                 session_start();
                 $_SESSION["userWelcome"] = "Welcome " . $row['name'];
-                $_SESSION["email"] = $row['email'];
+                $_SESSION["id"] = $row['id'];
                 header("Location: index.php");
                 exit();
             } 
