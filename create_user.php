@@ -26,9 +26,9 @@
         }
 
         // Checks for password weakness
-        if (strlen($password) < 8) {
+        if (strlen($password) < 6) {
             session_start();
-            setSession("passWeak", "Password must be at least 8 characters");
+            setSession("passWeak", "Password must be at least 6 characters");
             header("Location: reg.php");
             exit();
         }

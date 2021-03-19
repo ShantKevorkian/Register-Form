@@ -17,13 +17,12 @@
         session_start();
         $userId = $_SESSION["id"];
         
-        $query = "INSERT INTO comments (user_id, comment)
-                    VALUES ($userId, '$comment')";
+        $query = "INSERT INTO comments (user_id, comment, updated_at)
+                    VALUES ($userId, '$comment', '')";
                     
         if ($conn->query($query)) {
             session_start();
             $conn->close();
-            $_SESSION['editButton'] = "<form action = 'edit.php' method = 'POST'><input type='submit' name = 'submit' class='btn btn-primary col-md-4 offset-md-4' value = 'Edit'></form>";
             header("Location: comments.php");
             exit();
         }
