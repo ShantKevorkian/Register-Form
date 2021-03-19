@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 17, 2021 at 05:05 PM
+-- Generation Time: Mar 19, 2021 at 08:59 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -30,11 +30,18 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `comment`, `created_at`) VALUES
+(45, 11, 'sad', '2021-03-19 08:58:04');
 
 -- --------------------------------------------------------
 
@@ -49,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `user_reg` (
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
