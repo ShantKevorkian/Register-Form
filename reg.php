@@ -13,28 +13,13 @@
             <h3 class="d-flex align-items-center justify-content-center">Register</h3>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
                 <?php 
+                    include 'funcSession.php';
                     session_start();
-                    if(isset($_SESSION['emptyError']))  {
-                        echo $_SESSION['emptyError']; 
-                    }
-
-                    if(isset($_SESSION['passWeak']))  {
-                        echo $_SESSION['passWeak']; 
-                    }
-
-                    if(isset($_SESSION['emailInvalid']))  {
-                        echo $_SESSION['emailInvalid']; 
-                    }
-
-                    if(isset($_SESSION['emailExists']))  {
-                        echo $_SESSION['emailExists']; 
-                    }
-
-                    if(isset($_SESSION['datError']))  {
-                        echo $_SESSION['datError']; 
-                    }
-                    
-                    session_unset();
+                    getSession("emptyError");
+                    getSession("passWeak");
+                    getSession("emailInvalid");
+                    getSession("emailExists");
+                    getSession("datError");
                     session_destroy();
                 ?> 
             </h6> <br>

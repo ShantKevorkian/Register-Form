@@ -1,40 +1,37 @@
 <?php
+    include 'funcSession.php';
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        if (empty($_POST["name"]) || empty($_POST["comment"])) {
+        if (empty($_POST["comment"])) {
             session_start();
-            $_SESSION["emptyError"] = "Please fill all the required fields";
+            setSession("emptyError", "Please fill all the required fields");
             header("Location: index.php");
             exit();
         }
 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "internship";
+        include 'db_config.php';
 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . "<br>" . $conn->connect_error);
-        }
+        $comment = $conn->real_escape_string(htmlspecialchars($_POST['comment']));
 
-        $name = $conn->real_escape_string(htmlspecialchars($_POST['name']));
-        $comment = $_POST['comment'];
-
-        $query = "INSERT INTO comments (name, comment)
-                    VALUES ('$name', '$comment')";
+        session_start();
+        $userId = $_SESSION["id"];
+        
+        $query = "INSERT INTO comments (user_id, comment)
+                    VALUES ($userId, '$comment')";
                     
         if ($conn->query($query)) {
+            session_start();
             $conn->close();
+            $_SESSION['editButton'] = "<form action = 'edit.php' method = 'POST'><input type='submit' name = 'submit' class='btn btn-primary col-md-4 offset-md-4' value = 'Edit'></form>";
             header("Location: comments.php");
             exit();
         }
 
         else {
             session_start();
-            $_SESSION["datError"] = "Database query error";
+            setSession("datError", "Database Query Error");
             header("Location: index.php");
             exit();
         }
     }
-?>

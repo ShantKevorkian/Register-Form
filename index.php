@@ -1,7 +1,10 @@
 <?php
     session_start();
 
-    if (isset($_SESSION['id'])) {
+    if (!isset($_SESSION['id'])) {
+        header("Location: login.php");
+        exit();
+    }
 
 ?>
 
@@ -25,21 +28,13 @@
                 ?>
             </h3>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
-                <?php
-                    if(isset($_SESSION['emptyError']))  {
-                        echo $_SESSION['emptyError']; 
-                    }
-
-                    if(isset($_SESSION['datError']))  {
-                        echo $_SESSION['datError']; 
-                    }
+                <?php  
+                    include 'funcSession.php';
+                    getSession("emptyError");
+                    getSession("datError");
                 ?>
             </h6> <br>
             <form action = "create_comment.php" method = "POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name = "name" id="fullName" placeholder="John Doe" required>
-                </div> <br>
                 <div class="form-group">
                     <label for="comment">Comment</label>
                     <textarea class="form-control" name = "comment" id="textArea" rows="5" placeholder="Enter Text..."></textarea>
@@ -51,11 +46,3 @@
     </div>
 </body>
 </html>
-
-<?php
-    }
-    else {
-        header("Location: login.php");
-        exit();
-    }
-?>

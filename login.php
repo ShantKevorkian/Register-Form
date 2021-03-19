@@ -13,24 +13,12 @@
             <h3 class="d-flex align-items-center justify-content-center">Login</h3>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
                 <?php
+                    include 'funcSession.php';
                     session_start();
-                    if(isset($_SESSION['emptyError']))  {
-                        echo $_SESSION['emptyError']; 
-                    }
-
-                    if(isset($_SESSION['failure']))  {
-                        echo $_SESSION['failure']; 
-                    }
-
-                    if(isset($_SESSION['emailInvalid']))  {
-                        echo $_SESSION['emailInvalid']; 
-                    }
-
-                    if(isset($_SESSION['datError']))  {
-                        echo $_SESSION['datError']; 
-                    }
-            
-                    session_unset();
+                    getSession("emptyError");
+                    getSession("failure");
+                    getSession("emailInvalid");
+                    getSession("datError");
                     session_destroy();
                 ?> 
             </h6> <br>
@@ -48,7 +36,7 @@
                     <p class = "d-flex align-items-center justify-content-center mt-3">You don't have an account?</p>
                     <a href="reg.php" class="d-flex align-items-center justify-content-center">Register</a>
                 </div>
-                </form>
+            </form>
         </div>
     </div>
 </body>

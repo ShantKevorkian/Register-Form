@@ -1,23 +1,17 @@
 <?php
+    include 'funcSession.php';
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Checks for empty form inputs
         if (empty($_POST["email"]) || empty($_POST["password"])) {
             session_start();
-            $_SESSION["emptyError"] = "Please fill all the required fields";
+            setSession("emptyError", "Please fill all the required fields");
             header("Location: login.php");
             exit();
         }
 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "internship";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . "<br>" . $conn->connect_error);
-        }
+        include 'db_config.php';
 
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -25,7 +19,7 @@
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             session_start();
-            $_SESSION["emailInvalid"] = "Invalid email format";
+            setSession("emailInvalid", "Invalid email format");
             header("Location: reg.php");
             exit();
         }
@@ -36,7 +30,7 @@
 
         if (!$runQuery) {
             session_start();
-            $_SESSION["datError"] = "Database query error";
+            setSession("datError", "Database Query Error");
             header("Location: login.php");
             exit();
         }
@@ -57,11 +51,10 @@
 
             else {
                 session_start();
-                $_SESSION["failure"] = "Email or Password incorrect";
+                setSession("failure", "Email or Password incorrect");
                 header("Location: login.php");
                 exit();
             }
         }
 
     }
-?>

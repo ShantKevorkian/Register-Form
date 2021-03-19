@@ -1,15 +1,10 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "internship";
+    session_start();
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . "<br>" . $conn->connect_error);
-    }
+    include 'db_config.php';
 
-    $sqlSelect = "SELECT id, name, comment from comments";
+    $sqlSelect = "SELECT c.user_id, u.name, c.comment
+                    FROM comments c INNER JOIN user_reg u ON u.id = c.user_id";
 
     $runQuery = $conn->query($sqlSelect);
 
@@ -32,10 +27,9 @@
 </head>
 <body>
     <div class = "container">
-    <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
+    <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
         <h3 class = "d-flex align-items-center justify-content-center">
             <?php
-                session_start();
                 if(isset($_SESSION['userWelcome']))  {
                     echo $_SESSION['userWelcome']; 
                 }
@@ -48,15 +42,19 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Comment</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
         <p class = "d-flex align-items-center justify-content-center">
             <?php  
                 if ($runQuery->num_rows > 0) {
                     while($row = $runQuery->fetch_assoc()) {
-                        echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["comment"] . "</td></tr>";
+                        echo "<tr><td>" . $row["user_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["comment"] . "</td></tr>";
+                        if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']) {
+                            echo "<tr style = 'margin-left = 300px;'><td>" . $_SESSION['editButton'] . "</td></tr>";
+                        }
                     }
-                    } else {
+                } else {
                         echo "No Comment Written in the Database";
                 }
             ?>
