@@ -16,8 +16,8 @@
 
         $userId = $_SESSION["id"];
         
-        $query = "INSERT INTO comments (user_id, comment, updated_at)
-                    VALUES ($userId, '$comment', '')";
+        $query = "INSERT INTO comments (user_id, comment)
+                    VALUES ($userId, '$comment')";
                     
         if ($conn->query($query)) {
             $conn->close();
