@@ -3,8 +3,9 @@
 
     include 'db_config.php';
 
-    $sqlSelect = "SELECT c.user_id, u.name, c.comment, c.id
-                    FROM comments c INNER JOIN user_reg u ON (u.id = c.user_id)";
+    $sqlSelect = "SELECT c.user_id, u.name, c.comment, c.id, c.created_at
+                    FROM comments c INNER JOIN user_reg u ON (u.id = c.user_id)
+                    ORDER BY c.created_at";
 
     $runQuery = $conn->query($sqlSelect);
 
@@ -28,7 +29,8 @@
 <body>
     <div class = "container">
     <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
-        <h3 class = "d-flex align-items-center justify-content-center">
+    <a href="logout.php" class="btn btn-danger col-md-1 float-end">Logout</a>
+        <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
             <?php
                 if(isset($_SESSION['userWelcome']))  {
                     echo $_SESSION['userWelcome']; 
@@ -44,16 +46,19 @@
             Comment
             </div>
             <div class="col-sm">
-            
+            Created At
+            </div>
+            <div class="col-sm">
+            Edit
             </div>
         </div>
         <p class = "d-flex align-items-center justify-content-center">
             <?php  
                 if ($runQuery->num_rows > 0) {
                     while($row = $runQuery->fetch_assoc()) {
-                        echo "<div class = 'row border-bottom text-primary' style = 'width: 70%;'><div class='col-sm'>" . $row["name"] . "</div><div class='col-sm'>" . $row["comment"] . "</div></div> <br>";
+                        echo "<div class = 'row border-bottom text-primary' style = 'width: 77%;'><div class='col-sm'>" . $row["name"] . "</div><div class='col-sm'>" . $row["comment"] . "</div><div class='col-sm'>" . $row["created_at"] . "</div></div> <br>";
                         if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']) {
-                            echo '<a class = "btn btn-dark col-md-1 offset-md-10" style = "margin-top: -50px; margin-bottom: 25px;" href = "edit.php?id='. $row["id"]. ' " >Edit </a>';
+                            echo '<a class = "btn btn-dark col-md-1 offset-md-10" style = "margin-top: -70px; margin-bottom: 25px;" href = "edit.php?id='. $row["id"]. ' " >Edit </a>';
                         }
                     }
                 } else {

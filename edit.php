@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Comment</title>
+    <title>Edit Comment</title>
 </head>
 <body>
     <div class = "container">
@@ -42,8 +42,8 @@
                 <div class="form-group">
                     <textarea class="form-control" name = "editComment" id="textArea" rows="5" placeholder="Enter Text..."></textarea>
                 </div> <br>
-                <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Submit">
-                <a href="comments.php" class="btn btn-dark col-md-4 offset-md-4  mt-4">Back</a>
+                <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Edit">
+                <a href="logout.php" class="btn btn-danger col-md-4 offset-md-4  mt-4">Logout</a>
             </form>
         </div>
     </div>

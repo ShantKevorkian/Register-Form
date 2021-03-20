@@ -10,7 +10,7 @@
 <body>
     <div class = "container">
         <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
-            <h3 class="d-flex align-items-center justify-content-center">Login</h3>
+            <h3 class="d-flex align-items-center justify-content-center">Sign in</h3>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
                 <?php
                     include 'funcSession.php';
