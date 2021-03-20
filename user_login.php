@@ -1,11 +1,11 @@
 <?php
     include 'funcSession.php';
+    session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Checks for empty form inputs
         if (empty($_POST["email"]) || empty($_POST["password"])) {
-            session_start();
             setSession("emptyError", "Please fill all the required fields");
             header("Location: login.php");
             exit();
@@ -18,7 +18,6 @@
         $hashedPassword = md5($password);
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            session_start();
             setSession("emailInvalid", "Invalid email format");
             header("Location: reg.php");
             exit();
@@ -29,7 +28,6 @@
         $runQuery = $conn->query($selectEmail);
 
         if (!$runQuery) {
-            session_start();
             setSession("datError", "Database Query Error");
             header("Location: login.php");
             exit();
@@ -42,7 +40,6 @@
 
             // Checks if form inputs exist in the database
             if ($count == 1) {
-                session_start();
                 $_SESSION["userWelcome"] = "Welcome " . $row['name'];
                 $_SESSION["id"] = $row['id'];
                 header("Location: index.php");
@@ -50,7 +47,6 @@
             } 
 
             else {
-                session_start();
                 setSession("failure", "Email or Password incorrect");
                 header("Location: login.php");
                 exit();

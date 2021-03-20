@@ -30,15 +30,14 @@
     <div class = "container">
     <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
     <a href="logout.php" class="btn btn-danger col-md-1 float-end">Logout</a>
-        <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
+        <h3 class = "d-flex align-items-center justify-content-center mb-5" style = "clear: both;">
             <?php
                 if(isset($_SESSION['userWelcome']))  {
                     echo $_SESSION['userWelcome']; 
                 }
             ?>
         </h3>
-        <h5 class = "d-flex align-items-center justify-content-center mb-5">Comments written in the database:</h5>
-        <div class="row border-bottom border-dark mb-5">
+        <div class="row border-bottom border-dark mb-4">
             <div class="col-sm">
             Name
             </div>
@@ -62,8 +61,9 @@
                         }
                     }
                 } else {
-                        echo "No Comment Written in the Database";
+                        echo "No Comments Written in the Database";
                 }
+                $conn->close();
             ?>
         </p>
         </div>
