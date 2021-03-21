@@ -24,7 +24,6 @@
                                 WHERE id = $comment_id";
 
         if ($conn->query($queryUpdate)) {
-            session_start();
             $conn->close();
             header("Location: comments.php");
             exit();

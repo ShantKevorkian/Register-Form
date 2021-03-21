@@ -28,44 +28,40 @@
 </head>
 <body>
     <div class = "container">
-    <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
-    <a href="logout.php" class="btn btn-danger col-md-1 float-end">Logout</a>
-        <h3 class = "d-flex align-items-center justify-content-center mb-5" style = "clear: both;">
-            <?php
-                if(isset($_SESSION['userWelcome']))  {
-                    echo $_SESSION['userWelcome']; 
-                }
-            ?>
-        </h3>
-        <div class="row border-bottom border-dark mb-4">
-            <div class="col-sm">
-            Name
-            </div>
-            <div class="col-sm">
-            Comment
-            </div>
-            <div class="col-sm">
-            Created At
-            </div>
-            <div class="col-sm">
-            Edit
-            </div>
-        </div>
-        <p class = "d-flex align-items-center justify-content-center">
-            <?php  
-                if ($runQuery->num_rows > 0) {
-                    while($row = $runQuery->fetch_assoc()) {
-                        echo "<div class = 'row border-bottom text-primary' style = 'width: 77%;'><div class='col-sm'>" . $row["name"] . "</div><div class='col-sm'>" . $row["comment"] . "</div><div class='col-sm'>" . $row["created_at"] . "</div></div> <br>";
-                        if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']) {
-                            echo '<a class = "btn btn-dark col-md-1 offset-md-10" style = "margin-top: -70px; margin-bottom: 25px;" href = "edit.php?id='. $row["id"]. ' " >Edit </a>';
-                        }
+        <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
+        <a href="logout.php" class="btn btn-danger float-end">Logout</a>
+            <h3 class = "d-flex align-items-center justify-content-center mb-5" style = "clear: both;">
+                <?php
+                    if(isset($_SESSION['userWelcome']))  {
+                        echo $_SESSION['userWelcome']; 
                     }
-                } else {
-                        echo "No Comments Written in the Database";
-                }
-                $conn->close();
-            ?>
-        </p>
+
+                    else {
+                        echo "Anonymous User";
+                    }
+                ?>
+            </h3>
+            <table class = "table table-borderless" style = "border-collapse: separate; border-spacing: 15px;">
+                    <tr class = "pb-5">
+                        <th scope="col">Name</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Edit</th>
+                    </tr>
+                <?php  
+                    if ($runQuery->num_rows > 0) {
+                        while($row = $runQuery->fetch_assoc()) {
+                            echo "<tr><td>" . $row['name'] . "</td><td>" . $row['comment'] . "</td><td>" . $row['created_at'] . "</td>";
+                            if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']) {
+                                echo '<td class = "m-0 p-0"><a class = "btn btn-dark" href = "edit.php?id='. $row["id"]. ' " >Edit </a></td></tr>';
+                            }
+                        }
+                    } else {
+                            echo "<h5 class = 'd-flex align-items-center justify-content-center mb-5 text-danger'>No Comments Written in the Database</h3>";
+                    }
+                    $conn->close();
+                ?>
+            </table>
         </div>
     </div>
 </body>

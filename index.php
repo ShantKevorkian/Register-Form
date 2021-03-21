@@ -20,13 +20,14 @@
 <body>
     <div class = "container">
         <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
-            <h3 class="d-flex align-items-center justify-content-center">
+            <h3 class="d-flex align-items-center justify-content-center mb-5">
                 <?php
                     if(isset($_SESSION['userWelcome']))  {
                         echo $_SESSION['userWelcome']; 
                     }
                 ?>
             </h3>
+            <h4 class = "d-flex align-items-center justify-content-center text-secondary">Comment Your Thoughts</h4>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
                 <?php  
                     include 'funcSession.php';
@@ -36,7 +37,6 @@
             </h6> <br>
             <form action = "create_comment.php" method = "POST">
                 <div class="form-group">
-                    <label for="comment">Comment</label>
                     <textarea class="form-control" name = "comment" id="textArea" rows="5" placeholder="Enter Text..."></textarea>
                 </div> <br>
                 <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Submit">
