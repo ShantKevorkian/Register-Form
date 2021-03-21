@@ -1,14 +1,19 @@
 <?php
-
     session_start();
 
-    if (!isset($_SESSION["id"]) || !isset($_GET['id'])) {
+    $comment_id = (int) $_GET['id'];
+    $_SESSION["userID"] = $comment_id;
+
+    if ($comment_id != $_SESSION['userID']) { // TO BE CHECKED WITH ARTAK IMPORTANT
+        header("location: comments.php");     // IF SOMEONE REPLACES THE ID WITH ANOTHER ID THAT DOES NOT HAVE ACCESS TO
+        exit();
+    }
+
+    if (!isset($_SESSION["id"]) || !isset($_GET['id']) || empty($_GET['id'])) {
         header("location: comments.php");
         exit();
     }
 
-    $comment_id = (int) $_GET['id'];
-    $_SESSION["userID"] = $comment_id;
 ?>
 
 <!DOCTYPE html>
