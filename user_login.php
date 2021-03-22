@@ -40,7 +40,7 @@
 
             // Checks if form inputs exist in the database
             if ($count == 1) {
-                $_SESSION["userWelcome"] = "Welcome " . $row['name'];
+                $_SESSION["username"] = $row['name'];
                 $_SESSION["id"] = $row['id'];
                 header("Location: index.php");
                 exit();

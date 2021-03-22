@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include 'funcSession.php';
 
     if (!isset($_SESSION['id'])) {
         header("Location: login.php");
@@ -20,25 +21,20 @@
 <body>
     <div class = "container">
         <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
-            <h3 class="d-flex align-items-center justify-content-center mb-5">
-                <?php
-                    if(isset($_SESSION['userWelcome']))  {
-                        echo $_SESSION['userWelcome']; 
-                    }
-                ?>
-            </h3>
+                <? if(isset($_SESSION['username'])): ?>
+                    <h3 class="d-flex align-items-center justify-content-center mb-5">Welcome <?=$_SESSION['username']?></h3>
+                <? endif; ?>
             <h4 class = "d-flex align-items-center justify-content-center text-secondary">Comment Your Thoughts</h4>
-            <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
+            <h6 class="d-flex align-items-center justify-content-center text-danger mt-3 mb-3">
                 <?php  
-                    include 'funcSession.php';
                     getSession("emptyError");
                     getSession("datError");
                 ?>
-            </h6> <br>
+            </h6>
             <form action = "create_comment.php" method = "POST">
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <textarea class="form-control" name = "comment" id="textArea" rows="5" placeholder="Enter Text..."></textarea>
-                </div> <br>
+                </div>
                 <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Submit">
                 <a href="logout.php" class="btn btn-danger col-md-4 offset-md-4  mt-4">Logout</a>
             </form>

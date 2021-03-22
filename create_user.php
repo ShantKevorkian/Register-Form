@@ -24,13 +24,6 @@
             exit();
         }
 
-        // Checks for password weakness
-        if (strlen($password) < 6) {
-            setSession("passWeak", "Password must be at least 6 characters");
-            header("Location: reg.php");
-            exit();
-        }
-
         $selectEmail = "SELECT email from user_reg WHERE email = '$email'";
 
         if (!$conn->query($selectEmail)) {

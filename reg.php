@@ -11,7 +11,7 @@
     <div class = "container">
         <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
             <h3 class="d-flex align-items-center justify-content-center">Register</h3>
-            <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
+            <h6 class="d-flex align-items-center justify-content-center text-danger mt-3 mb-3">
                 <?php 
                     include 'funcSession.php';
                     session_start();
@@ -22,20 +22,20 @@
                     getSession("datError");
                     session_destroy();
                 ?> 
-            </h6> <br>
+            </h6>
             <form action = "create_user.php" method = "POST">
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name = "name" id="fullName" placeholder="John Doe" required>
-                </div> <br>
-                <div class="form-group">
+                </div>
+                <div class="form-group mb-3">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name = "email" id="emailReg" placeholder="example@gmail.com" required>
-                </div> <br>
-                <div class="form-group">
+                </div>
+                <div class="form-group mb-3">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name = "password" id="passReg" required>
-                </div> <br>
+                </div>
                 <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Register">
                 <div>
                     <p class = "d-flex align-items-center justify-content-center mt-3">You already have an account?</p>

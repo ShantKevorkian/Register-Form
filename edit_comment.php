@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $comment_id = $_SESSION["userID"];
+    $comment_id = (int)$_POST['id'];
     date_default_timezone_set("Europe/Moscow");
     $updated_date = date("Y-m-d H:i:s");
 
@@ -21,11 +21,14 @@
 
         $queryUpdate = "UPDATE comments
                             SET comment = '$edit_comment', updated_at = '$updated_date'
-                                WHERE id = $comment_id";
+                                WHERE id = '$comment_id' AND user_id = ".$_SESSION["id"];
 
         if ($conn->query($queryUpdate)) {
             $conn->close();
             header("Location: comments.php");
             exit();
+        }
+        else {
+            echo "Database query error";
         }
     }

@@ -1,19 +1,32 @@
 <?php
+    include 'db_config.php';
+    include 'funcSession.php';
     session_start();
 
     $comment_id = (int) $_GET['id'];
-    $_SESSION["userID"] = $comment_id;
-
-    if ($comment_id != $_SESSION['userID']) { // TO BE CHECKED WITH ARTAK IMPORTANT
-        header("location: comments.php");     // IF SOMEONE REPLACES THE ID WITH ANOTHER ID THAT DOES NOT HAVE ACCESS TO
-        exit();
-    }
 
     if (!isset($_SESSION["id"]) || !isset($_GET['id']) || empty($_GET['id'])) {
         header("location: comments.php");
         exit();
     }
 
+    $queryComment = "SELECT comment, id FROM comments 
+                        WHERE id = $comment_id AND user_id = ".$_SESSION["id"];
+
+    $runQuery = $conn->query($queryComment);
+    
+    if (!$runQuery) {
+        $conn->close();
+        setSession("datError", "Database query error");
+    }
+
+    $row = $runQuery->fetch_assoc();
+
+    if(!$row) {
+        setSession("otherComment", "You can't change someone else's comment");
+        header("location: comments.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -30,23 +43,23 @@
         <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
             <h3 class="d-flex align-items-center justify-content-center mb-5">
                 <?php
-                    if(isset($_SESSION['userWelcome']))  {
-                        echo $_SESSION['userWelcome']; 
+                    if(isset($_SESSION['username']))  {
+                        echo "Welcome ". $_SESSION['username']; 
                     }
                 ?>
             </h3>
             <h4 class = "d-flex align-items-center justify-content-center text-secondary">Edit your comment</h4>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3">
                 <?php  
-                    include 'funcSession.php';
                     getSession("emptyError");
                     getSession("datError");
                 ?>
             </h6> <br>
             <form action = "edit_comment.php" method = "POST">
-                <div class="form-group">
-                    <textarea class="form-control" name = "editComment" id="textArea" rows="5" placeholder="Enter Text..."></textarea>
-                </div> <br>
+                <div class="form-group mb-3">
+                    <textarea class="form-control" name = "editComment" id="textArea" rows="5"><?=$row['comment'] ?></textarea>
+                </div>
+                <input type="hidden" name="id" value="<?=$row['id'] ?>">
                 <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Edit">
                 <a href="logout.php" class="btn btn-danger col-md-4 offset-md-4  mt-4">Logout</a>
             </form>
