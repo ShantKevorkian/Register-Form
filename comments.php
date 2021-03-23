@@ -3,7 +3,7 @@
     include 'db_config.php';
     include 'functions.php';
     
-    getWeather();
+    $weatherData = getWeather();
 
     $sqlSelect = "SELECT c.user_id, u.name, c.comment, c.id, c.created_at
                     FROM comments c INNER JOIN user_reg u ON (u.id = c.user_id)
@@ -31,8 +31,8 @@
     <div class = "container">
         <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
         <a href="logout.php" class="btn btn-danger float-end">Logout</a>
-        <h6>Location: <?=$_SESSION['cityName']?></h6>
-        <h6>Temperature: <?=$_SESSION['tempCelsius']?>&#8451;</h6>
+        <h6>Location: <?=$weatherData['city_name']?></h6>
+        <h6>Temperature: <?=$weatherData['temperature']?></h6>
             <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
                 <?php if(isset($_SESSION['username'])): ?>
                     Welcome <?=$_SESSION['username'] ?>
