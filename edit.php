@@ -1,7 +1,6 @@
 <?php
     include 'db_config.php';
-    include 'funcSession.php';
-    session_start();
+    include 'functions.php';
 
     $comment_id = (int) $_GET['id'];
 

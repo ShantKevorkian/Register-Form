@@ -1,21 +1,13 @@
 <?php
-    session_start();
 
     include 'db_config.php';
-    include 'funcSession.php';
-
-    $curlInitialize = curl_init();
-    curl_setopt($curlInitialize, CURLOPT_URL, "http://api.openweathermap.org/data/2.5/weather?q=Yerevan&appid=9638c0cc9efbbfc00e4493a1effc4199&units=metric");
-    curl_setopt($curlInitialize, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curlInitialize, CURLOPT_HEADER, false); 
-
-    $result = curl_exec($curlInitialize);
-    curl_close($curlInitialize);
-    $data = json_decode($result);
+    include 'functions.php';
+    
+    getWeather();
 
     $sqlSelect = "SELECT c.user_id, u.name, c.comment, c.id, c.created_at
                     FROM comments c INNER JOIN user_reg u ON (u.id = c.user_id)
-                    ORDER BY c.created_at";
+                    ORDER BY c.created_at DESC";
 
     $runQuery = $conn->query($sqlSelect);
 
@@ -39,8 +31,8 @@
     <div class = "container">
         <div class = "col-md-10 offset-md-1 border p-5 bg-light mt-5">
         <a href="logout.php" class="btn btn-danger float-end">Logout</a>
-        <h6>Location: <?=$data->name?></h6>
-        <h6>Temperature: <?=$data->main->temp?>&#8451;</h6>
+        <h6>Location: <?=$_SESSION['cityName']?></h6>
+        <h6>Temperature: <?=$_SESSION['tempCelsius']?>&#8451;</h6>
             <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
                 <?php if(isset($_SESSION['username'])): ?>
                     Welcome <?=$_SESSION['username'] ?>
@@ -61,19 +53,19 @@
                         <th scope="col">Edit</th>
                     </tr>
                 <?php if ($runQuery->num_rows > 0): ?>
-                        <?php while($row = $runQuery->fetch_assoc()): ?>
-                            <tr><td><?=$row['name']?></td>
-                            <td><?=$row['comment']?></td>
-                            <td><?=$row['created_at']?></td>
-                            <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']): ?>
-                                <td class = "m-0 p-0"><a class = "btn btn-dark" href = "edit.php?id=<?=$row["id"]?> ">Edit </a></td></tr>
-                            <?php endif; ?>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <h5 class = 'd-flex align-items-center justify-content-center mb-5 text-danger'>No Comments Written in the Database</h3>
-                    <?php endif;
-                        $conn->close();
-                    ?>
+                    <?php while($row = $runQuery->fetch_assoc()): ?>
+                        <tr><td><?=$row['name']?></td>
+                        <td><?=$row['comment']?></td>
+                        <td><?=$row['created_at']?></td>
+                        <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']): ?>
+                            <td class = "m-0 p-0"><a class = "btn btn-dark" href = "edit.php?id=<?=$row["id"]?> ">Edit </a></td></tr>
+                        <?php endif; ?>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <h5 class = 'd-flex align-items-center justify-content-center mb-5 text-danger'>No Comments Written in the Database</h3>
+                <?php endif;
+                    $conn->close();
+                ?>
             </table>
         </div>
     </div>

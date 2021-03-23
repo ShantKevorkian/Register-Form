@@ -1,6 +1,5 @@
 <?php
-    include 'funcSession.php';
-    session_start();
+    include 'functions.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

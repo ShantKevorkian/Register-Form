@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    include 'funcSession.php';
+    include 'functions.php';
 
     if (!isset($_SESSION['id'])) {
         header("Location: login.php");

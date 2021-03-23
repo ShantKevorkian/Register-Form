@@ -13,8 +13,7 @@
             <h3 class="d-flex align-items-center justify-content-center">Sign in</h3>
             <h6 class="d-flex align-items-center justify-content-center text-danger mt-3 mb-3">
                 <?php
-                    include 'funcSession.php';
-                    session_start();
+                    include 'functions.php';
                     getSession("emptyError");
                     getSession("failure");
                     getSession("emailInvalid");
