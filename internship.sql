@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 20, 2021 at 05:20 PM
+-- Generation Time: Mar 23, 2021 at 01:16 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -35,7 +35,17 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `comment`, `created_at`, `updated_at`) VALUES
+(191, 24, 'sad', '2021-03-23 11:04:03', NULL),
+(192, 24, 'asd', '2021-03-23 11:06:37', NULL),
+(186, 25, 'aefaafaff', '2021-03-23 08:47:55', NULL),
+(185, 25, 'aefaafaff', '2021-03-23 08:47:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -50,14 +60,35 @@ CREATE TABLE IF NOT EXISTS `user_reg` (
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user_reg`
 --
 
 INSERT INTO `user_reg` (`id`, `name`, `email`, `password`) VALUES
-(22, 'Shant Kevorkian', 'shant97@outlook.com', '25f9e794323b453885f5181f1b624d0b');
+(25, 'test', 'test@test.com', '202cb962ac59075b964b07152d234b70'),
+(26, 'raffi', 'raffi95@outlook.com', '202cb962ac59075b964b07152d234b70'),
+(27, 'test', 'test@test.com', '202cb962ac59075b964b07152d234b70'),
+(24, 'nazo', 'nazo@gmail.com', '25f9e794323b453885f5181f1b624d0b'),
+(23, 'aa', 'aa@aa.com', '202cb962ac59075b964b07152d234b70'),
+(22, 'Shant Kevorkian', 'shant97@outlook.com', '25f9e794323b453885f5181f1b624d0b'),
+(28, 'rrrr', 'ss@ss.com', '25f9e794323b453885f5181f1b624d0b');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weather_data`
+--
+
+DROP TABLE IF EXISTS `weather_data`;
+CREATE TABLE IF NOT EXISTS `weather_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(32) NOT NULL,
+  `temperature` int(11) NOT NULL,
+  `weatherTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
