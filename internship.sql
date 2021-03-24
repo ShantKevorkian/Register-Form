@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 23, 2021 at 09:13 PM
+-- Generation Time: Mar 24, 2021 at 07:48 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=238 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comments`
@@ -45,14 +45,7 @@ INSERT INTO `comments` (`id`, `user_id`, `comment`, `created_at`, `updated_at`) 
 (191, 24, 'sad', '2021-03-23 11:04:03', NULL),
 (192, 24, 'asd', '2021-03-23 11:06:37', NULL),
 (186, 25, 'aefaafaff', '2021-03-23 08:47:55', NULL),
-(185, 25, 'aefaafaff', '2021-03-23 08:47:29', NULL),
-(231, 24, 'asdsad', '2021-03-23 21:12:27', NULL),
-(230, 24, 'sadasdasd', '2021-03-23 20:35:59', NULL),
-(229, 24, 'sadsadsadsad', '2021-03-23 19:40:24', NULL),
-(228, 24, 'sdadsasasds', '2021-03-23 19:40:10', NULL),
-(227, 24, 'asdsad', '2021-03-23 17:43:11', NULL),
-(226, 24, 'jk', '2021-03-23 16:25:36', NULL),
-(225, 24, 'asd', '2021-03-23 13:44:48', NULL);
+(185, 25, 'aefaafaff', '2021-03-23 08:47:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,16 +86,16 @@ CREATE TABLE IF NOT EXISTS `weather_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `city_name` varchar(32) NOT NULL,
   `temperature` int(11) NOT NULL,
-  `weatherTime` time DEFAULT NULL,
+  `weatherTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `weather_data`
 --
 
 INSERT INTO `weather_data` (`id`, `city_name`, `temperature`, `weatherTime`) VALUES
-(17, 'Yerevan', 13, '23:35:59');
+(23, 'Yerevan', 15, '2021-03-24 11:44:42');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
