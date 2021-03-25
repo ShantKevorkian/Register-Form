@@ -24,6 +24,6 @@
         }
     }
     else {
-        echo "error";
+        header("Location: comments.php");
+        exit();
     }
-?>
