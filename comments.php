@@ -40,9 +40,8 @@
                             txt: txt
                         }, 
                         success: function(response){
-                            $("#tbl").empty();
+                            $("#comSearch").empty();
                             $("#blank").hide();
-                            $("#commSearch").css("display", "block");
                             $("#commSearch").html(response);
                         }
                     });
@@ -76,23 +75,14 @@
                         getSession('otherComment');
                     ?>
                 </h6>
-                <table id="commSearch" style = "display: none;">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Comment</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <table class = "table table-borderless" id = "tbl" style = "border-collapse: separate; border-spacing: 15px;">
-                        <tr class = "pb-5">
-                            <th scope="col">Name</th>
-                            <th scope="col">Comment</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Edit</th>
-                        </tr> 
+                <table class = "table table-borderless" style = "border-collapse: separate; border-spacing: 15px;">
+                    <tr class = "pb-5">
+                        <th scope="col">Name</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Edit</th>
+                    </tr> 
+                    <tbody id="commSearch">
                     <?php if ($runQuery->num_rows > 0): ?>
                         <?php while($row = $runQuery->fetch_assoc()): ?>
                             <tr><td><?=$row['name']?></td>
@@ -107,7 +97,7 @@
                     <?php endif;
                         $conn->close();
                     ?>
-                    </div>
+                    </tbody>
                 </table>
             </div>
         </div>
