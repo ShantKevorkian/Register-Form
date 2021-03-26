@@ -5,7 +5,7 @@
     
     $weatherData = getWeather();
 
-    $sqlSelect = "SELECT c.user_id, u.name, c.comment, c.id, c.created_at
+    $sqlSelect = "SELECT user_id, name, comment, c.id, created_at
                     FROM comments c INNER JOIN user_reg u ON (u.id = c.user_id)
                     ORDER BY c.created_at DESC";
 
@@ -29,25 +29,45 @@
         <title>Comment Page</title>
     </head>
     <script>
-        $(document).ready(function() {
-            $("#btnSearch").click(function() {
-                var txt = $("#txtSearch").val();
-                if($("#txtSearch").val()) {
-                    $.ajax({
+        $(function() {
+            var xhr = null;
+            $("#txtSearch").keyup(function() {    
+                var q = $("#txtSearch").val();
+                if(q.length > 2) {
+                    xhr = $.ajax({
                         type: "POST",
-                        url: 'search.php',
+                        url: "search.php",
                         data: {
-                            txt: txt
-                        }, 
+                            txt: q
+                        },
+                        dataType: "json",
+                        beforeSend : function() {
+                            if(xhr != null && xhr.readyState < 4) {
+                                xhr.abort();
+                            }
+                        },
                         success: function(response){
-                            $("#comSearch").empty();
+                            $("#commSearch").empty();
                             $("#blank").hide();
-                            $("#commSearch").html(response);
+                            if (response.error) {
+                                $('#commSearch').append(response.message);
+                            }
+                            else{
+                                $.each(response["message"], function(key, value) {
+                                    let result = "<tr class='tr'>" +
+                                    "<td class='td'>" + value[0].name + "</td>" +
+                                    "<td class='td'>" + value[0].comment + "</td>" +
+                                    "<td class='td'>" + value[0].created_at + "</td>" +
+                                    "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value[0].id + " '>Edit </a></td>" +
+                                    "</tr>";
+                                    $('#commSearch').append(result);
+                                });
+                            }
                         }
                     });
                 }
                 else {
-                    $("#blank").html("You have to search for something");
+                    $("#blank").html("At least 3 characters required");
                 }
             });
         });
@@ -60,7 +80,6 @@
                 <h6>Temperature: <?=$weatherData['temperature']?></h6>
                 <div>
                     <input type = "text" class = "pt-1 pb-1 border border-secondary rounded" placeholder = "Search" style = "outline: none; text-indent: 5px;" id = "txtSearch">
-                    <input type = "submit" class = "btn btn-outline-secondary pl-1 pr-1 pt-1 pb-1 mb-1" value = "Search" id = "btnSearch">
                 </div>
                 <span id = "blank" class = "text-danger ml-5"> </span>
                 <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">

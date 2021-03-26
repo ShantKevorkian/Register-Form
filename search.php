@@ -4,26 +4,25 @@
 
         include 'db_config.php';
 
-        $return_arr = array();
+        $arrData = [];
 
-        $querySearch = "SELECT comment, created_at, name 
-                        FROM comments c, user_reg u
-                        WHERE comment LIKE '%$text%'
-                        AND c.user_id = u.id";
+        $querySearch = "SELECT name, comment, created_at, c.id 
+                        FROM comments c INNER JOIN  user_reg u
+                        ON (c.user_id = u.id) 
+                        WHERE comment LIKE '%$text%'";
 
         $runQuery = $conn->query($querySearch);
 
         if($runQuery->num_rows > 0) {
             while($row = $runQuery->fetch_assoc()) {
-                echo "	<tr>
-                            <td>".$row['name']."</td>
-                            <td>".$row['comment']."</td>
-                            <td>".$row['created_at']."</td>
-                        </tr>";
+                $return_arr[] = array($row);
             }
+            usleep(150000);
+            echo json_encode(["error" => false, "message" => $return_arr]);
         }
         else {
-            echo "No comments found";
+            usleep(150000);
+            echo json_encode(["error" => true, "message" => "No Comments Found"]) ;
         }
     }
     else {
