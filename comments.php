@@ -76,9 +76,9 @@
             });
         });
     </script>
-    <body>
+    <body class = "bg-dark">
         <div class = "container">
-            <div class = "col-md-10 offset-md-1 border p-3 bg-light mt-5">
+            <div class = "col-md-10 offset-md-1 border p-3 bg-light mt-5 rounded">
                 <a href="logout.php" class="btn btn-danger float-end">Logout</a>
                 <h6>Location: <?=$weatherData['city_name']?></h6>
                 <h6>Temperature: <?=$weatherData['temperature']?></h6>
@@ -98,11 +98,11 @@
                         getSession('otherComment');
                     ?>
                 </h6>
-                <table class = "table table-borderless" style = "border-collapse: separate; border-spacing: 15px;">
+                <table class = "table table-borderless" style = "border-collapse: separate; border-spacing: 5px;">
                     <tr class = "pb-5">
                         <th scope="col">Name</th>
                         <th scope="col">Comment</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Edit</th>
                     </tr> 
                     <tbody id="commSearch">
@@ -112,7 +112,7 @@
                             <td><?=$row['comment']?></td>
                             <td><?=$row['created_at']?></td>
                             <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']): ?>
-                                <td class = "m-0 p-0"><a class = "btn btn-dark" href = "edit.php?id=<?=$row["id"]?> ">Edit </a></td></tr>
+                                <td class = "m-0 p-0"><a class = "btn btn-dark pt-1 pb-1" href = "edit.php?id=<?=$row["id"]?> ">Edit </a></td></tr>
                             <?php endif; ?>
                         <?php endwhile; ?>
                     <?php else: ?>

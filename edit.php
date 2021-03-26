@@ -37,9 +37,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Comment</title>
 </head>
-<body>
+<body class = "bg-dark">
     <div class = "container">
-        <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5">
+        <div class = "col-md-4 offset-md-4 border p-5 bg-light mt-5 rounded">
             <h3 class="d-flex align-items-center justify-content-center mb-5">
                 <?php
                     if(isset($_SESSION['username']))  {
@@ -59,7 +59,7 @@
                     <textarea class="form-control" name = "editComment" id="textArea" rows="5"><?=$row['comment'] ?></textarea>
                 </div>
                 <input type="hidden" name="id" value="<?=$row['id'] ?>">
-                <input type="submit" name = "submit" class="btn btn-primary col-md-4 offset-md-4" value = "Edit">
+                <input type="submit" name = "submit" class="btn btn-dark col-md-4 offset-md-4" value = "Edit">
                 <a href="logout.php" class="btn btn-danger col-md-4 offset-md-4  mt-4">Logout</a>
             </form>
         </div>
