@@ -54,10 +54,10 @@
                             }
                             else {
                                 $.each(response["message"], function(key, value) {
-                                    let result = "<tr class='tr'>" +
-                                    "<td class='td'>" + value[0].name + "</td>" +
-                                    "<td class='td'>" + value[0].comment + "</td>" +
-                                    "<td class='td'>" + value[0].created_at + "</td>";
+                                    let result = 
+                                    "<tr><td>" + value[0].name + "</td>" +
+                                    "<td>" + value[0].comment + "</td>" +
+                                    "<td>" + value[0].created_at + "</td>";
                                     if(<?=$_SESSION['id']?> == value[0].user_id) {
                                         result += "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value[0].id + " '>Edit </a></td></tr>";
                                     }
