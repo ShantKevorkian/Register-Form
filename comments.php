@@ -42,7 +42,7 @@
                         },
                         dataType: "json",
                         beforeSend : function() {
-                            if(xhr != null && xhr.readyState < 4) {
+                            if(xhr != null) {
                                 xhr.abort();
                             }
                         },

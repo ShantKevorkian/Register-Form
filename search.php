@@ -17,11 +17,11 @@
             while($row = $runQuery->fetch_assoc()) {
                 $return_arr[] = array($row);
             }
-            usleep(150000);
+            usleep(200000);
             echo json_encode(["error" => false, "message" => $return_arr]);
         }
         else {
-            usleep(150000);
+            usleep(200000);
             echo json_encode(["error" => true, "message" => "No Comments Found"]) ;
         }
     }
