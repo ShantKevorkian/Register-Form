@@ -41,7 +41,7 @@
                             txt: q
                         },
                         dataType: "json",
-                        beforeSend : function() {
+                        beforeSend: function() {
                             if(xhr != null) {
                                 xhr.abort();
                             }
@@ -57,9 +57,10 @@
                                     let result = "<tr class='tr'>" +
                                     "<td class='td'>" + value[0].name + "</td>" +
                                     "<td class='td'>" + value[0].comment + "</td>" +
-                                    "<td class='td'>" + value[0].created_at + "</td>" +
-                                    "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value[0].id + " '>Edit </a></td>" +
-                                    "</tr>";
+                                    "<td class='td'>" + value[0].created_at + "</td>";
+                                    if(<?=$_SESSION['id']?> == value[0].user_id){
+                                        result += "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value[0].id + " '>Edit </a></td></tr>";
+                                    }
                                     $('#commSearch').append(result);
                                 });
                             }
@@ -79,7 +80,7 @@
                 <h6>Location: <?=$weatherData['city_name']?></h6>
                 <h6>Temperature: <?=$weatherData['temperature']?></h6>
                 <div>
-                    <input type = "text" class = "pt-1 pb-1 border border-secondary rounded" placeholder = "Search" style = "outline: none; text-indent: 5px;" id = "txtSearch">
+                    <input type = "text" class = "p-0 border border-secondary rounded" placeholder = "Search" style = "outline: none; text-indent: 5px;" id = "txtSearch">
                 </div>
                 <span id = "blank" class = "text-danger ml-5"> </span>
                 <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
