@@ -30,9 +30,9 @@
     </head>
     <script>
         $(function() {
-            var xhr = null;
+            let xhr = null;
             $("#txtSearch").keyup(function() {    
-                var q = $("#txtSearch").val();
+                let q = $("#txtSearch").val();
                 if(q.length > 2) {
                     xhr = $.ajax({
                         type: "POST",
@@ -49,10 +49,10 @@
                         success: function(response){
                             $("#commSearch").empty();
                             $("#blank").hide();
-                            if (response.error) {
+                            if(response.error) {
                                 $('#commSearch').append(response.message);
                             }
-                            else{
+                            else {
                                 $.each(response["message"], function(key, value) {
                                     let result = "<tr class='tr'>" +
                                     "<td class='td'>" + value[0].name + "</td>" +
@@ -82,7 +82,7 @@
                 <div>
                     <input type = "text" class = "p-0 border border-secondary rounded" placeholder = "Search" style = "outline: none; text-indent: 5px;" id = "txtSearch">
                 </div>
-                <span id = "blank" class = "text-danger ml-5"> </span>
+                <span id = "blank" class = "text-danger"> </span>
                 <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
                     <?php if(isset($_SESSION['username'])): ?>
                         Welcome <?=$_SESSION['username'] ?>
