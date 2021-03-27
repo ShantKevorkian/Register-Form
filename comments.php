@@ -55,11 +55,11 @@
                             else {
                                 $.each(response["message"], function(key, value) {
                                     let result = 
-                                    "<tr><td>" + value[0].name + "</td>" +
-                                    "<td>" + value[0].comment + "</td>" +
-                                    "<td>" + value[0].created_at + "</td>";
-                                    if(<?=$_SESSION['id']?> == value[0].user_id) {
-                                        result += "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value[0].id + " '>Edit </a></td></tr>";
+                                    "<tr><td>" + value.name + "</td>" +
+                                    "<td>" + value.comment + "</td>" +
+                                    "<td>" + value.created_at + "</td>";
+                                    if(<?=$_SESSION['id']?> == value.user_id) {
+                                        result += "<td class = 'm-0 p-0'><a class = 'btn btn-dark' href = 'edit.php?id=" + value.id + " '>Edit </a></td></tr>";
                                     }
                                     else {
                                         result += "</tr>";

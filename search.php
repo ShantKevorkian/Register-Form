@@ -15,7 +15,7 @@
 
         if($runQuery->num_rows > 0) {
             while($row = $runQuery->fetch_assoc()) {
-                $return_arr[] = array($row);
+                $return_arr[] = $row;
             }
             usleep(200000);
             echo json_encode(["error" => false, "message" => $return_arr]);
