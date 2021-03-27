@@ -16,10 +16,10 @@
 
         if($runQuery->num_rows > 0) {
             while($row = $runQuery->fetch_assoc()) {
-                $return_arr[] = $row;
+                $arrData[] = $row;
             }
             usleep(200000);
-            echo json_encode(["error" => false, "message" => $return_arr]);
+            echo json_encode(["error" => false, "message" => $arrData]);
         }
         else {
             usleep(200000);
