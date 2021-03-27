@@ -9,7 +9,8 @@
         $querySearch = "SELECT user_id, name, comment, created_at, c.id 
                         FROM comments c INNER JOIN  user_reg u
                         ON (c.user_id = u.id) 
-                        WHERE comment LIKE '%$text%'";
+                        WHERE comment LIKE '%$text%'
+                        ORDER BY created_at DESC";
 
         $runQuery = $conn->query($querySearch);
 
