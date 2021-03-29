@@ -4,6 +4,7 @@
 
         include 'db_config.php';
 
+        usleep(200000);
         $arrData = [];
 
         $querySearch = "SELECT user_id, name, comment, created_at, c.id 
@@ -18,11 +19,9 @@
             while($row = $runQuery->fetch_assoc()) {
                 $arrData[] = $row;
             }
-            usleep(200000);
             echo json_encode(["error" => false, "message" => $arrData]);
         }
         else {
-            usleep(200000);
             echo json_encode(["error" => true, "message" => "No Comments Found"]) ;
         }
     }
