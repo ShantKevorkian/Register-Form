@@ -19,7 +19,7 @@ final class CreateTableComments extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('comments');
-        $table->addColumn('user_id', 'integer', ['identity' => false])
+        $table->addColumn('user_id', 'integer')
               ->addColumn('comment', 'text')
               ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated_at', 'string', ['limit' => 50, 'null' => true])

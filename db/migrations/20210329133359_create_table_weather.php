@@ -20,7 +20,7 @@ final class CreateTableWeather extends AbstractMigration
     {
         $table = $this->table('weather_data');
         $table->addColumn('city_name', 'string', ['limit' => 32])
-              ->addColumn('temperature', 'integer', ['identity' => false])
+              ->addColumn('temperature', 'integer')
               ->addColumn('weatherTime', 'timestamp')
               ->create();
     }
