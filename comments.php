@@ -82,8 +82,8 @@
                 <a href="logout.php" class="btn btn-danger float-end">Logout</a>
                 <h6>Location: <?=$weatherData['city_name']?></h6>
                 <h6>Temperature: <?=$weatherData['temperature']?></h6>
-                <div>
-                    <input type = "text" class = "p-0 border border-secondary rounded" placeholder = "Search" style = "outline: none; text-indent: 5px;" id = "txtSearch">
+                <div class="col-lg-3">
+                    <input type = "text" class = "form-control" placeholder = "Search" id = "txtSearch">
                 </div>
                 <span id = "blank" class = "text-danger"> </span>
                 <h3 class = "d-flex align-items-center justify-content-center" style = "clear: both;">
